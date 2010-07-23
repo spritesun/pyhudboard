@@ -1,8 +1,8 @@
 import urllib2, socket
-import json
+import json, datetime
 
 #CONFIG
-servers = ["http://10.112.121.206:9080", "http://ci.dev.int.realestate.com.au:8080"]
+servers = [{"url" : "http://10.112.121.206:9080", "name" : "Product"} , {"url" : "http://10.112.120.57:8080", "name" : "ci.dev.int"}]
 exclude = [
     "appcmd (master)", 
     "customsearch (master)", 
@@ -44,7 +44,7 @@ template = """
 		article {
 			color: #FFF;
 			float: left;
-			margin: 10px;
+			margin: 30px;
 		  	-moz-box-shadow: 5px 5px 5px #333333;
 		  	-webkit-box-shadow: 5px 5px 11px #333333;
 		  	-o-box-shadow: 5px 5px 11px #333333;
@@ -57,25 +57,36 @@ template = """
 		}
 		
 		.success {
-			background:#63af10;
+			background:#608204;
 		}
 		
 		.building {
-			background: blue;
+			background: #3861b6;
 		}
 		
 		.failure{
-			background: #bd2111;
+			background: #a01208;
 		}
 
-        .undefined {
-            background: #BBB;
-        }
+        	.undefined {
+            		background: #BBB;
+        	}
 		
-        .offline {
+        	.offline {
 			background: white;
-			color: #bd2111;
-			border: 5px solid #bd2111;
+			color: #a01208;
+			border: 15px solid #a01208;
+		}
+		
+		.message {
+			background: white;
+			color: black;
+			-moz-box-shadow: none;
+                        -webkit-box-shadow: none;
+                        -o-box-shadow: none;
+                        -ms-box-shadow: none;
+                        box-shadow: none;
+			font: bold 20px Helvetica, Arial, sans-serif;
 		}
 		
 		</style>
@@ -92,12 +103,15 @@ template = """
 def hudson_color_to_css(color):
     if color.find('anime') > -1:
         return "building"
-    if color.find("aborted") > -1:
-        return "undefined"
     if color == "blue":
         return "success"
     if color == "red":
         return "failure"
+    if color == "offline":
+	return "offline"
+    if color == "message":
+	return "message"
+    return "undefined"
 
 def create_html_element(name, status):
     html = "<article class=\"[status]\"><header><h1>[name]</h1></header></article>"
@@ -115,19 +129,21 @@ if __name__ == '__main__':
         jobs = []
         for server in servers:
             try:
-                o = json.loads(urllib2.urlopen(urllib2.Request(server + "/api/json")).read())
+                o = json.loads(urllib2.urlopen(urllib2.Request(server['url'] + "/api/json")).read())
                 jobs.extend(o['jobs'])
             except:
-                offline_servers.append(server.replace("http://", "").split(":")[0])
+                offline_servers.append(server['name'])
 
         html_elements = ""
         for job in jobs:
             if job['name'] not in exclude:
                 html_elements += create_html_element(job['name'], job['color'])
         for os in offline_servers:
-            html_elements += create_html_element("OFFLINE:<br />" + os, "offline")
+            html_elements += create_html_element("OFFLINE: " + os, "offline")
+	now = datetime.datetime.now()
+	html_elements += create_html_element("generated: " + str(now.year) + "-" + str(now.month) + "-" + str(now.day) + " " + str(now.hour) + ":" + str(now.minute), "message")
         write_html_file(template.replace("[content]", html_elements))
-    except Exception, (error):
+    except ValueError, (error):
         content = """<html>
                         <head>
                             <script type='text/javascript'>setTimeout('window.location.reload()', 5000)</script>
