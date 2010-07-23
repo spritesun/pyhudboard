@@ -79,6 +79,8 @@ template = """
 		}
 		
 		.message {
+            position: absolute;
+            bottom: 0px;
 			background: white;
 			color: black;
 			-moz-box-shadow: none;
