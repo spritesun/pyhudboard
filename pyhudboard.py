@@ -81,6 +81,7 @@ template = """
 		.message {
             position: absolute;
             bottom: 0px;
+            right: 0px;
 			background: white;
 			color: black;
 			-moz-box-shadow: none;
@@ -142,8 +143,8 @@ if __name__ == '__main__':
                 html_elements += create_html_element(job['name'], job['color'])
         for os in offline_servers:
             html_elements += create_html_element("OFFLINE: " + os, "offline")
-	now = datetime.datetime.now()
-	html_elements += create_html_element("generated: " + str(now.year) + "-" + str(now.month) + "-" + str(now.day) + " " + str(now.hour) + ":" + str(now.minute), "message")
+	
+        html_elements += create_html_element(datetime.datetime.now().strftime("%A %d/%m/%Y - %H:%M"), "message")
         write_html_file(template.replace("[content]", html_elements))
     except ValueError, (error):
         content = """<html>
