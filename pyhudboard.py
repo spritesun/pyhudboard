@@ -1,5 +1,5 @@
-import urllib2, socket
-import json, datetime
+import urllib2, socket, random
+import json, datetime, os, sys
 
 #CONFIG
 servers = [{"url" : "http://10.112.121.206:9080", "name" : "Product"} , {"url" : "http://10.112.120.57:8080", "name" : "ci.dev.int"}]
@@ -13,9 +13,11 @@ exclude = [
     "rsearch (master)", 
     "rsearch (project rea1)", 
     "rsearch (quagmire)", 
+    "rsearch (build2.0)",
     "spire (master)"
 ]
 
+voices = ['Zarvox', 'Trinoids', 'Fred', 'Ralph', 'Princess', 'Victoria']
 
 template = """
 <!DOCTYPE html> 
@@ -118,7 +120,13 @@ def hudson_color_to_css(color):
 
 def create_html_element(name, status):
     html = "<article class=\"[status]\"><header><h1>[name]</h1></header></article>"
-    return html.replace("[name]", name).replace("[status]", hudson_color_to_css(status))
+    color = hudson_color_to_css(status)
+    if color == "failure":
+        if len(sys.argv) == 2 and sys.argv[1] == "voice":
+            voice = voices[random.randrange(0, len(voices))]
+            formatted_name = name.replace('_', ' ').replace('(', '').replace(')', '')
+            os.system("say -v " + voice + " " + formatted_name + " is broken")
+    return html.replace("[name]", name).replace("[status]", color)
 
 def write_html_file(content): 
     f = open('dash.html', 'w')
