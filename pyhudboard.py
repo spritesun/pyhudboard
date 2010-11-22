@@ -2,7 +2,12 @@ import urllib2, socket
 import json, datetime
 
 #CONFIG
-servers = [{"url" : "http://10.112.121.206:9080", "name" : "Product"} , {"url" : "http://10.112.120.57:8080", "name" : "ci.dev.int"}]
+#When running else where replace localhost with 
+#10.112.121.217
+
+servers = [
+	{"url" : "http://localhost:8080/view/JetWire", "name" : "stabby"}
+]
 exclude = [
     "appcmd (master)", 
     "customsearch (master)", 
@@ -13,7 +18,8 @@ exclude = [
     "rsearch (master)", 
     "rsearch (project rea1)", 
     "rsearch (quagmire)", 
-    "spire (master)"
+    "spire (master)",
+	  "jetwire-install-gems-integration"
 ]
 
 
@@ -30,7 +36,7 @@ template = """
 		body {  
 		  padding: 10px;  
 		  margin: 0;
-		  font: bold 3.5em Helvetica, Arial, sans-serif;
+		  font: bold 1.82em Helvetica, Arial, sans-serif;
 		  background-color: #FFF;
 		}  
 
@@ -44,7 +50,8 @@ template = """
 		article {
 			color: #FFF;
 			float: left;
-			margin: 30px;
+			width: 840px;
+			margin: 12px;
 		  	-moz-box-shadow: 5px 5px 5px #333333;
 		  	-webkit-box-shadow: 5px 5px 11px #333333;
 		  	-o-box-shadow: 5px 5px 11px #333333;
@@ -53,7 +60,10 @@ template = """
 		}
 		
 		h1, h2, p {
-			margin: 50px;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			margin-left: 5px;
+			margin-right: 5px;
 		}
 		
 		.success {
@@ -82,7 +92,7 @@ template = """
             position: absolute;
             bottom: 0px;
             right: 0px;
-			background: white;
+			background: transparent;
 			color: black;
 			-moz-box-shadow: none;
                         -webkit-box-shadow: none;
@@ -96,6 +106,7 @@ template = """
   </head> 
 <body> 
 	<section id="content">
+		<h1>Jetwire</h1>
     [content]
   	</section> 
 </body>  
@@ -140,7 +151,7 @@ if __name__ == '__main__':
         html_elements = ""
         for job in jobs:
             if job['name'] not in exclude:
-                html_elements += create_html_element(job['name'], job['color'])
+                html_elements += create_html_element(job['name'].replace("jetwire-", ""), job['color'])
         for os in offline_servers:
             html_elements += create_html_element("OFFLINE: " + os, "offline")
 	
