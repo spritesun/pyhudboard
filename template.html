@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Build Dashboard</title>
+        <script type="text/javascript">
+        //setTimeout('window.location.reload()', 1000)
+        </script>
+        <style>
+            
+        body {
+          padding: 10px;
+          margin: 0;
+          font: bold 2.7em Helvetica, Arial, sans-serif;
+          background-color: #FFF;
+        }
+        
+        section, header, footer, aside, nav, article, figure {
+          display: block;
+        }
+        
+        article {
+            color: #FFF;
+            float: left;
+            margin: 90px;
+            -moz-box-shadow: 5px 5px 5px #333333;
+            -webkit-box-shadow: 5px 5px 11px #333333;
+            -o-box-shadow: 5px 5px 11px #333333;
+            -ms-box-shadow: 5px 5px 11px #333333;
+            box-shadow: 5px 5px 11px #333333;
+        }
+        
+        h1, h2, p {
+            margin: 25px;
+        }
+        
+        .success {
+            background:#608204;
+        }
+        
+        .building {
+            background: #3861b6;
+        }
+        
+        .failure{
+            background: #a01208;
+        }
+            
+        .undefined {
+            background: #BBB;
+        }
+               
+        .onhold {
+            background: #F6E3CE;
+        }
+            
+        .offline {
+            background: white;
+            color: #a01208;
+            border: 15px solid #a01208;
+        }
+
+        .workedon {
+            opacity:.3; 
+        }
+
+        .worker {
+            -webkit-transform: rotate(20deg);
+            position: absolute;
+            color: black;
+            border: 10px dashed black;
+            margin: 0;
+            padding: 10px;
+            font-size: 2.5em;
+        }
+        
+        .message {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            background: white;
+            color: black;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            -o-box-shadow: none;
+            -ms-box-shadow: none;
+            box-shadow: none;
+            font: bold 20px Helvetica, Arial, sans-serif;
+        }
+        
+        </style>
+  </head>
+<body>
+    <section id="content">
+    [content]
+    </section>
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+    $(".workedon").each(function() {
+        var worker = $(this).attr("worker");
+        var y = parseInt($(this).offset().top + $(this).height() / 2);
+        var x = parseInt($(this).offset().left + $(this).width() / 2);
+        var id = x + "-" + y;
+        var html = '<div class="worker" id="' + id + '">' + worker + '</div>';
+        $("#content").append(html);
+        var new_element = $("#" + id);
+        console.log(html);
+        new_element.css("top", parseInt(y - new_element.height() / 2)).css("left", parseInt(x - new_element.width() / 2));
+    });
+</script>
+</html>
