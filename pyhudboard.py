@@ -50,7 +50,7 @@ def create_html_element(name, status):
         if status == "red":
             color = color + " workedon"
             html = html.replace("[worker]", claims[name])
-        else:
+        elif status == "blue":
             claims.pop(name)
     if name.find("reaxml") > -1:
         color = "onhold"
@@ -85,7 +85,7 @@ if __name__ == '__main__':
         html_elements += create_html_element(datetime.datetime.now().strftime("%A %d/%m/%Y - %H:%M:%S"), "message")
         write_html_file(template.replace("[content]", html_elements))
         save_claims(claims)
-    except ValueError, (error):
+    except Exception, (error):
         content = """<html>
                         <head>
                             <script type='text/javascript'>setTimeout('window.location.reload()', 5000)</script>
