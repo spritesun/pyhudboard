@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        font-size: 17px;
+        background-color: white;
+        color: #000;
+    } 
+    #step2 {
+        display: none;
+    }
+</style>
+<script type="text/javascript" src="/static/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var link = $("#claim_link").attr("href");
+        $("#customise_links").click(function() {
+            var worker = $("#worker_name").val();
+            if(worker) {
+                $("#claim_link").attr("href", link.replace('none', worker));
+                $("#step2").show("fast");
+            }
+        });
+    });
+</script>
+</head>
+<body>
+<h1>Pyhudboard setup</h1>
+<div>
+<b>Step1:</b><br />
+Please enter the name you'd like to show on the dashboard<br />
+<input type="text" id="worker_name" /><input type="button" value="OK" id="customise_links" /><br />
+<br />
+</div>
+<div id="step2">
+<b>Step 2:</b><br />
+Drag those links to your browser's bookmark bar<br />
+<a id="claim_link" href="javascript:var%20e=document.createElement('script');try { document.getElementById('hudson_claim').setAttribute('action', 'claim'); } catch(e){};e.setAttribute('language','javascript');e.setAttribute('id','hudson_claim');e.setAttribute('person','none');e.setAttribute('action','claim');e.setAttribute('src','http://dashboard02.win.int:5000/static/claimbuild.js');document.body.appendChild(e);void(0);">claim</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:var%20e=document.createElement('script');try { document.getElementById('hudson_claim').setAttribute('action', 'clear'); } catch(e){};e.setAttribute('language','javascript');e.setAttribute('id','hudson_claim');e.setAttribute('action','clear');e.setAttribute('src','http://dashboard02.win.int:5000/static/claimbuild.js');document.body.appendChild(e);void(0);">clear</a>
+</div>
+</body>
+</html>
+ 

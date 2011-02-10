@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import make_response
+from flask import render_template
 import fileinput, sys
 from peopleworkingonbuilds import *
 app = Flask(__name__)
@@ -27,6 +28,10 @@ def clear():
         claims.pop(build_name)
     save_claims(claims)
     return "ok"
+
+@app.route("/setup")
+def setup():
+    return render_template("setup.html")
 
 if __name__ == "__main__":
     #app.debug = True
