@@ -1,4 +1,5 @@
 var buildName = document.title.replace("[Hudson]", "").trim();
+alert(window.location);
 var host = "dashboard02.win.int:5000";
 var action = document.getElementById("hudson_claim").getAttribute("action");
 var constructClaimUrl = function() {
@@ -29,4 +30,4 @@ var handleChange = function(e) {
 
 xhr.open("GET", url);
 xhr.onreadystatechange = handleChange;
-xhr.send();
+//xhr.send();
