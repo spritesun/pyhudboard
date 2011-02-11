@@ -28,6 +28,7 @@
 </head>
 <body>
 <h1>Pyhudboard setup</h1>
+
 <div>
 <b>Step1:</b><br />
 Please enter the name you'd like to show on the dashboard<br />
@@ -35,9 +36,18 @@ Please enter the name you'd like to show on the dashboard<br />
 <br />
 </div>
 <div id="step2">
+    <div>
 <b>Step 2:</b><br />
 Drag those links to your browser's bookmark bar<br />
 <a id="claim_link" href="javascript:var%20e=document.createElement('script');try { document.getElementById('hudson_claim').setAttribute('action', 'claim'); } catch(e){};e.setAttribute('language','javascript');e.setAttribute('id','hudson_claim');e.setAttribute('person','none');e.setAttribute('action','claim');e.setAttribute('src','http://dashboard02.win.int:5000/static/claimbuild.js');document.body.appendChild(e);void(0);">claim</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:var%20e=document.createElement('script');try { document.getElementById('hudson_claim').setAttribute('action', 'clear'); } catch(e){};e.setAttribute('language','javascript');e.setAttribute('id','hudson_claim');e.setAttribute('action','clear');e.setAttribute('src','http://dashboard02.win.int:5000/static/claimbuild.js');document.body.appendChild(e);void(0);">clear</a>
+</div>
+<br />
+<div>
+    <b>Step 3:</b><br />
+    Go to a hudson build page (eg: <a href="http://dashboard02:9080/job/ad-acceptance/">http://dashboard02:9080/job/ad-acceptance/</a>) and click "claim" to put your name on it!<br />
+    Click 'clear' to clear any name showing on the build.
+    Note: If a build goes <span style="color:green">green</span>, any associated name will be cleared. If it's <span style="color:blue">blue</span>, the name is still there but not displayed.
+</div>
 </div>
 </body>
 </html>
