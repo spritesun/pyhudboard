@@ -52,10 +52,10 @@ def create_html_element(name, status):
             html = html.replace("[worker]", claims[name])
         elif status == "blue":
             claims.pop(name)
-    if name.find("reaxml") > -1:
-        color = "onhold"
-        if claims.has_key(name):
-            color = color + " workedon"
+    #if name.find("reaxml") > -1:
+    #    color = "onhold"
+    #    if claims.has_key(name):
+    #        color = color + " workedon"
     return html.replace("[name]", name).replace(" (master)", "").replace("[status]", color)
 
 def write_html_file(content):
