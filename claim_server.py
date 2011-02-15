@@ -16,7 +16,7 @@ def claim():
     claims[build_name] = person
     save_claims(claims)
     response = make_response()
-    response.headers["Access-Control-Allow-Origin"] = "*";
+    response.headers["Access-Control-Allow-Origin"] = "<origin> | *";
     return "ok"
 
 @app.route("/clear")

@@ -1,0 +1,29 @@
+--------------
+pre-requisites
+--------------
+- python 2.6 (2.5 probably works)
+- simplejson ("easy_install simplejson" or "pip install simplejson")
+- flask ("easy_install flask" or "pip install flask")
+
+---------
+Dashboard    
+---------
+To get the dashboard going:
+
+$ nohup ./refresh.sh &
+
+That will regenerate dash.html every two seconds or so. If you want to slow it down or speed it up, edit refresh.sh
+
+$ open dash.html
+
+to open the dashboard on a mac. Use whatever command works for your system.
+Cmd+Shift+F to display if fullscreen in chrome (again, whatever works for your browser)
+
+------------
+Claim builds
+------------
+to start the claim server
+
+$ nohup python claim_server.py &
+
+point your browser to http://servername:5000/setup.html and follow the instructions.

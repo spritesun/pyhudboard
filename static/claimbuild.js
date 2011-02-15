@@ -1,7 +1,7 @@
 var buildName = document.title.replace("[Hudson]", "").trim();
-alert(window.location);
-var host = "dashboard02.win.int:5000";
+var host = document.getElementById('hudson_claim').getAttribute('src').replace("http://", "").split("/")[0];
 var action = document.getElementById("hudson_claim").getAttribute("action");
+
 var constructClaimUrl = function() {
     var person = "none";
     try {
@@ -16,6 +16,7 @@ var constructClaimUrl = function() {
 };
 
 var url = '';
+
 if(action === "claim") {
     url = constructClaimUrl();
 }
@@ -25,9 +26,11 @@ else if(action === "clear") {
 
 var xhr = new XMLHttpRequest();
 var handleChange = function(e) {
-    // do nothing!
+    if(e.onreadystate === 4) {
+        alert(person + " claimed " + buildName);
+    }
 };
 
 xhr.open("GET", url);
 xhr.onreadystatechange = handleChange;
-//xhr.send();
+xhr.send();
