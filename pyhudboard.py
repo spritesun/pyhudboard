@@ -91,7 +91,7 @@ def build_html(jobs, offline_servers):
 
 if __name__ == '__main__':
     try:
-        socket.setdefaulttimeout(5)
+        socket.setdefaulttimeout(1)
         template = get_file_content("templates/dash.html")
         jobs, offline_servers = get_jobs_and_offline_servers(servers)
         html_content = build_html(jobs, offline_servers)
