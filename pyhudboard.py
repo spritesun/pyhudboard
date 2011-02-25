@@ -1,6 +1,9 @@
 import urllib2, socket, random
 import json, datetime, os, sys
 from peopleworkingonbuilds import *
+import traceback
+
+LOG_FILENAME = 'pyhudboard.log'
 
 # The servers you want to get builds from
 servers = [
@@ -98,5 +101,6 @@ if __name__ == '__main__':
         write_file_content('dash.html', template.replace("[content]", html_content))
         save_claims(claims)
     except Exception, (error):
+        traceback.print_exc(file=sys.stdout)
         error_content = get_file_content("templates/error.html")
         write_file_content('dash.html', error_content.replace("[error]", str(error)))
