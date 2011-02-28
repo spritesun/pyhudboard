@@ -27,7 +27,7 @@ exclude = [
 claims = get_claims_as_hash()
 
 def get_file_content(path): 
-    f = open("templates/dash.html", 'r')
+    f = open("templates/dashboard.html", 'r')
     content = f.read()
     f.close()
     return content
