@@ -21,7 +21,8 @@ exclude = [
     "rsearch (build2.0)",
     "spire (master)", 
     "librea (rca_two)", 
-    "rsearch (rca_two)" 
+    "rsearch (rca_two)", 
+    "reaxml (master)"
 ]
 
 claims = get_claims_as_hash()

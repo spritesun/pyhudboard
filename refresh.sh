@@ -1,2 +1,2 @@
 #!/bin/bash
-while true;do python pyhudboard.py;sleep 10;done
+while true;do python pyhudboard.py;sleep 15;done
