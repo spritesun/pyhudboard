@@ -40,6 +40,8 @@ def write_file_content(path, content):
 
 def hudson_color_to_css_class(color):
     if color.find('anime') > -1:
+        if color.find('red') > -1:
+            return "building-from-failure"
         return "building"
     if color == "blue":
         return "success"
