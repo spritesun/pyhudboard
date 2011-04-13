@@ -82,7 +82,7 @@ def create_html_element(name, status):
     html = "<article class=\"[class]\" worker=\"[worker]\"><header><h1>[name]</h1></header></article>"
     css_class = hudson_color_to_css_class(status)
     if claims.has_key(name):
-        if status.find("red") > -1:
+        if status.find("red") > -1 or status.find("aborted") > -1:
             css_class = css_class + " workedon"
             html = html.replace("[worker]", claims[name])
         elif status == "blue":
