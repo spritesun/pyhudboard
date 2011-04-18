@@ -23,7 +23,8 @@ exclude = [
     "librea (rca_two)", 
     "rsearch (rca_two)", 
     "reaxml (master)", 
-    "product-e2e-regression"
+    "product-e2e-regression", 
+    "Offmarket"
 ]
 
 claims = get_claims_as_hash()
