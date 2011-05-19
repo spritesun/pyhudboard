@@ -2,30 +2,17 @@ import urllib2, socket, random
 import json, datetime, os, sys
 from peopleworkingonbuilds import *
 import traceback
+import ConfigParser
 
-LOG_FILENAME = 'pyhudboard.log'
+config = ConfigParser.ConfigParser()
+config.readfp(open("config.txt"))
+items = config.items("servers")
+servers=[]
+for item in items:
+    servers.append({"url": item[1], "name": item[0]})
+exclude = [a.strip() for a in config.get("exclude", "list").split(",")]
 
-# The servers you want to get builds from
-servers = [
-  {"url" : "http://10.113.192.70:9080/view/Tests", "name" : "Product"} ,
-  {"url" : "http://10.112.120.57:8080/", "name" : "ci.dev.int"}
-]
-
-# The builds you don't want to display on your dashboard
-exclude = [
-    "customsearch (master)",
-    "psadmin",
-    "rsearch (master)",
-    "rsearch (project rea1)",
-    "rsearch (quagmire)",
-    "rsearch (build2.0)",
-    "spire (master)", 
-    "librea (rca_two)", 
-    "rsearch (rca_two)", 
-    "reaxml (master)", 
-    "product-e2e-regression", 
-    "Offmarket"
-]
+font_size = config.get("font", "size")
 
 claims = get_claims_as_hash()
 
@@ -103,7 +90,7 @@ if __name__ == '__main__':
         template = get_file_content("templates/dash.html")
         jobs, offline_servers = get_jobs_and_offline_servers(servers)
         html_content = build_html(jobs, offline_servers)
-        write_file_content('dash.html', template.replace("[content]", html_content))
+        write_file_content('dash.html', template.replace("[content]", html_content).replace("[font-size]", font_size))
         save_claims(claims)
     except Exception, (error):
         traceback.print_exc(file=sys.stdout)
