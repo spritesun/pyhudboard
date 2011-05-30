@@ -1,6 +1,6 @@
+config.txt
 *.pyc
 dash.html
 .DS_Store
 *.out
 peopleworkingonbuilds.txt
-config.txt
