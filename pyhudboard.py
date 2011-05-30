@@ -10,7 +10,9 @@ items = config.items("servers")
 servers=[]
 for item in items:
     servers.append({"url": item[1], "name": item[0]})
-exclude = [a.strip() for a in config.get("exclude", "list").split(",")]
+
+exclude_builds = [a.strip() for a in config.get("exclude", "builds").split(",")]
+exclude_colors = [a.strip() for a in config.get("exclude", "colors").split(",")]
 
 font_size = config.get("font", "size")
 
@@ -55,7 +57,8 @@ def get_jobs_and_offline_servers(servers):
 
 def append_jobs_html_content(jobs, html_content=""):
     for job in jobs:
-        if job['name'] not in exclude:
+        if job['name'] not in exclude_builds and job['color'] not in exclude_colors:
+            print job['color']
             html_content += create_html_element(job['name'], job['color'])
     return html_content
 
