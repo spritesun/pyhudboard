@@ -1,4 +1,4 @@
-var buildName = document.title.replace("[Hudson]", "").trim();
+var buildName = document.title.replace("[Jenkins]", "").replace("[Hudson]", "").trim();
 var host = document.getElementById('hudson_claim').getAttribute('src').replace("http://", "").split("/")[0];
 var action = document.getElementById("hudson_claim").getAttribute("action");
 

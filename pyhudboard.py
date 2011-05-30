@@ -23,9 +23,10 @@ def get_file_content(path):
     return content
 
 def write_file_content(path, content):
-    f = open(path, 'w')
+    f = open(path + ".tmp", 'w')
     f.write(content)
     f.close()
+    os.rename(path + ".tmp", path)
 
 def hudson_color_to_css_class(color):
     if color.find('anime') > -1:
