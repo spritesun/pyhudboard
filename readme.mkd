@@ -27,3 +27,8 @@ to start the claim server
 $ nohup python claim_server.py &
 
 point your browser to http://servername:8080/setup.html and follow the instructions.
+
+-------
+Example
+-------
+![](http://github.com/translated/pyhudboard/raw/master/example.png) 
