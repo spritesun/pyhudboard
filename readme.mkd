@@ -25,4 +25,7 @@ $ nohup python claim_server.py &
 point your browser to http://servername:8080/setup.html and follow the instructions.
 
 # Example
+
+6 builds on the dashboard. One disabled (grey), one broken (red). "translated" is currently working on the broken build.
+
 ![](http://github.com/translated/pyhudboard/raw/master/example.png) 
