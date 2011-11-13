@@ -1,0 +1,9 @@
+[servers]
+Homer: http://localhost:8080
+
+[exclude]
+builds:
+colors:
+
+[font]
+size: 4
