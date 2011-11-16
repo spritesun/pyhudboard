@@ -6,6 +6,7 @@
     <string>Dashboard</string>
     <key>ProgramArguments</key>
     <array>
+    <string>/bin/bash</string>
     <string>refresh.sh</string>
     </array>
     <key>RunAtLoad</key>

@@ -68,7 +68,12 @@ def append_offline_servers_html_content(servers, html_content=""):
     return html_content
     
 def append_generation_time_html_content(html_content=""):
-    html_content += create_html_element(datetime.datetime.now().strftime("%A %d/%m/%Y - %H:%M:%S"), "message")
+    html_content += create_html_element(
+    "Melbourne:<br/>" +
+    datetime.datetime.now().strftime("%H:%M:%S") +
+    "<br/><br/>" +
+    "Xi'an:<br/>" +
+    (datetime.datetime.now() - datetime.timedelta(3 * 1.0 / 24)).strftime("%H:%M:%S"), "message")
     return html_content
     
 def create_html_element(name, status):
